@@ -1,0 +1,98 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* Base font settings */
+html {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #333;
+  }
+  
+/* Headings */
+h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.75em;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+h5 {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+h6 {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1em;
+  line-height: 1.6; 
+}
+
+a {
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+//General Mixins
+
+@mixin flex ($direction, $wrap, $justify, $align) {
+	display: flex;
+	flex-direction: $direction;
+	flex-wrap: $wrap;
+	justify-content: $justify;
+	align-items: $align;
+}//@include flex (row, wrap, space-around, center);
+
+@mixin text-style ($color, $size, $height, $weight) {
+	color: $color;
+	font-size: $size; 
+    line-height: $height;
+    font-weight: $weight;
+}//@include text-style($medium-grey, 20px, 26px, 400);
+
+@mixin text-clamp ($lines){
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: $lines;
+	-webkit-box-orient: vertical;
+}//@include text-clamp(3);
+
+//Colors
+
+$black: #000;
+$medium-grey: #666666;
+$lighter-grey: #E4E4E4;
+$blue: #0A7DB9;
+
+

@@ -1,0 +1,9 @@
+@import '/src/assets/styles/styles.scss';
+
+nav {
+    .logo-container {
+        cursor: pointer;
+        @include flex (row, nowrap, flex-start, center);
+        gap: 15px;
+    }
+}
