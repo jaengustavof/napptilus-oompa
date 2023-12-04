@@ -16,16 +16,20 @@ const DetailsMain = () => {
     const oompaDetail = useSelector(state => state.oompaLoompas.details[id]);
 
     useEffect(() => {
-        dispatch(fetchOompaDetailRequest(id));
+        const isDataStale = !oompaDetail || (Date.now() - oompaDetail.fetchedAt) > 86400000;
 
-        axios.get(`https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptilus/oompa-loompas/${id}`)
-            .then(response => {
-                dispatch(fetchOompaDetailSuccess(id, response.data));
-            })
-            .catch(error => {
-                dispatch(fetchOompaDetailFailure(id, error.message));
-            });
-    }, [id, dispatch]);
+        if (isDataStale) {
+            dispatch(fetchOompaDetailRequest(id));
+
+            axios.get(`https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptilus/oompa-loompas/${id}`)
+                .then(response => {
+                    dispatch(fetchOompaDetailSuccess(id, response.data));
+                })
+                .catch(error => {
+                    dispatch(fetchOompaDetailFailure(id, error.message));
+                });
+        }
+    }, [id, dispatch, oompaDetail]);
 
     if (!oompaDetail) {
         return <div>There is no Oompa with that id...</div>;

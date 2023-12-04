@@ -11,7 +11,8 @@ const initialState = {
     loading: false,
     data: [],
     error: null,
-    details: {}
+    details: {},
+    lastFetch: null
 };
 
 const oompaLoompaReducer = (state = initialState, action) => {
@@ -19,19 +20,22 @@ const oompaLoompaReducer = (state = initialState, action) => {
         case FETCH_OOMPA_LOOMPAS_REQUEST:
             return { ...state, loading: true };
         case FETCH_OOMPA_LOOMPAS_SUCCESS:
-            return { ...state, loading: false, data: action.payload };
+            return { ...state, loading: false, data: action.payload, lastFetch: Date.now() };
         case FETCH_OOMPA_LOOMPAS_FAILURE:
             return { ...state, loading: false, error: action.payload };
             
         case FETCH_OOMPA_DETAIL_REQUEST:
             return { ...state, loading: true };
-        case FETCH_OOMPA_DETAIL_SUCCESS:
-            const { id, data } = action.payload;
-            return {
-                ...state, 
-                loading: false, 
-                details: { ...state.details, [id]: data }
-            };
+            case FETCH_OOMPA_DETAIL_SUCCESS:
+                const { id, data, fetchedAt } = action.payload;
+                return {
+                    ...state, 
+                    loading: false, 
+                    details: { 
+                        ...state.details, 
+                        [id]: { ...data, fetchedAt }
+                    }
+                };
         case FETCH_OOMPA_DETAIL_FAILURE:
             return { ...state, loading: false, error: action.payload };
         default:

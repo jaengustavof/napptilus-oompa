@@ -30,7 +30,7 @@ export const fetchOompaDetailRequest = (id) => ({
 
 export const fetchOompaDetailSuccess = (id, data) => ({
   type: FETCH_OOMPA_DETAIL_SUCCESS,
-  payload: { id, data }
+  payload: { id, data, fetchedAt: Date.now() }
 });
 
 export const fetchOompaDetailFailure = (id, error) => ({

@@ -10,7 +10,7 @@ const HomeMain = () => {
 
     const dispatch = useDispatch();
     const lastFetch = useSelector(state => state.oompaLoompas.lastFetch);
-
+   
     const fetchAllOompaLoompas = async () => {
         dispatch(fetchOompaLoompasRequest());
         try {
